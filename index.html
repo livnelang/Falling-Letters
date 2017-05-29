@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Woobi Game Exercise</title>
+    <!--css-->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/explosion.css">
+    <!--js-->
+    <script src="js/particle_explode.js"></script>
+    <script src="js/game.js"></script>
+</head>
+
+<body>
+<!-- wrapper  -->
+<div id="wrapper">
+    <!-- main  -->
+    <main id="main">
+        <button class="game_btn" id="start_btn">Start Game</button>
+        <!--game-over-->
+        <div id="game-over">
+            <h2>Game Over</h2>
+            <div class="player-input">
+                <label>Please enter your name</label>
+                <input type="text">
+                <button class="game_btn" id="submit_score">Start Game</button>
+            </div>
+        </div>
+        <!--highlights-->
+        <div id="highlights">
+
+        </div>
+        <div class="player-panel">
+            <div id="game-score">Score: <span id="score">0</span> &nbsp● </div>
+            <div id="game-lives">Lives: <span id="lives">3</span></div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

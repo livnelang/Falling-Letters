@@ -1,0 +1,104 @@
+html {
+    height: 100%;
+}
+body {
+    font-family: Lato, 'Helvetica Nueue', Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 160%;
+    color: #555459;
+    line-height: 1.5rem;
+     background: linear-gradient(#00B2D6, #02DDD8);
+}
+#main {
+    background: white;
+    width:360px;
+    height:600px;
+    margin: auto;
+    margin-top: 20px;
+    text-align: center;
+    position: relative;
+    border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.player-panel {
+    position: absolute;
+    bottom:0;
+    background: cornflowerblue;
+    width: 100%;
+}
+#game-score, #game-lives {
+    float:left;
+    position:relative;
+    display: inline;
+    padding-left: 5px;
+}
+#game-lives {
+    padding-left: 10px;
+}
+
+.falling-letter {
+    color: black;
+    position: absolute;
+    font-size: 20px
+}
+
+.game_btn {
+    border-radius: 4px;
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+#start_btn {
+    margin-top: 30%;
+}
+#submit_score {
+    margin-top: 20px;
+}
+
+#game-over, #highlights {
+    display: none;
+    position: relative;
+    top: 20%;
+}
+
+.player-input {
+
+}
+.player-input label, input {
+    display: block;
+    margin: auto;
+}
+
+
+/** Shake Effect **/
+.hit {
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
