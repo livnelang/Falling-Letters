@@ -5,6 +5,7 @@ window.onload = function() {
 function loadGame() {
     document.getElementById('start_btn').addEventListener('click', function startIt(elm) {
         fadeOut(elm.currentTarget);
+        fadeOut(document.getElementById('game-title'));
         var letters_game = new LettersGame();
     });
 }
@@ -54,7 +55,8 @@ function LettersGame() {
     //Create a letter element and setup its falling animation, add the animation to the active animation array, and setup an onfinish handler that will represent a miss. 
     function createLetter() {
         var idx = Math.floor(Math.random() * LETTERS.length);
-        var x = (Math.random() * 360);
+        var x =  Math.floor(Math.random() * 350) + 10;
+        console.log(x);
         var falling_letter = document.createElement('div');
         falling_letter.className += "falling-letter";
         falling_letter.style.left = x + 'px';
@@ -74,10 +76,8 @@ function LettersGame() {
         function myMove(letter) {
             var pos = 20;
             falling_letter.interval = setInterval(frame, 10);
-            console.log('fall interval_id: ', falling_letter.interval);
             function frame() {
                 if (pos == 576) {
-                    console.log('clear interval_id: ', falling_letter.interval);
                     falling_letter.clearMove(falling_letter.interval);
                     missedLetter();
                 } else {
@@ -133,6 +133,7 @@ function LettersGame() {
 
             // if letter exists
             if(letters_array[charStr]) {
+                explode(letters_array[charStr].offsetLeft, letters_array[charStr].offsetTop);
                 letters_array[charStr].clearMove();
                 main.removeChild(letters_array[charStr]);
                 delete letters_array[charStr];

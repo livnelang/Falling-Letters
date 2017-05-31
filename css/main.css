@@ -20,6 +20,9 @@ body {
     border-radius: 4px;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
 }
+#main h2 {
+    padding-top: 30px;
+}
 
 .player-panel {
     position: absolute;
@@ -56,7 +59,7 @@ body {
     cursor: pointer;
 }
 #start_btn {
-    margin-top: 30%;
+    margin-top: 20%;
 }
 #submit_score {
     margin-top: 20px;
@@ -101,4 +104,48 @@ body {
     40%, 60% {
         transform: translate3d(4px, 0, 0);
     }
+}
+
+/** Explosion CSS **/
+.explosion {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    pointer-events: none;
+}
+.explosion .particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    animation: pop 1s reverse forwards;
+}
+
+@keyframes pop {
+    from {
+        opacity: 0;
+    }
+    to {
+        top: 50%;
+        left: 50%;
+        opacity: 1;
+    }
+}
+
+
+h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    color: #CCC;
+    font-family: "Helvetica", "Arial", sans-serif;
+    user-select: none;
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Chrome/Safari/Opera */
+    -moz-user-select: none;
+    /* Firefox */
+    cursor: default;
 }
