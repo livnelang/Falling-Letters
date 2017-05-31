@@ -160,7 +160,7 @@ function LettersGame() {
             result: score
         };
 
-        $.post( "http://localhost:3000/insertRecord", player_data, function( data ) {
+        $.post( "https://falling-letters-ws.herokuapp.com/insertRecord", player_data, function( data ) {
             console.dir(data);
             var items = [];
             $.each( data, function( key, val ) {
