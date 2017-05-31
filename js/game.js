@@ -28,7 +28,7 @@ function LettersGame() {
     var score = "";
     var misses = livesElement.innerHTML;
     this.setCounterInterval = setCounterInterval;
-    document.addEventListener("keypress", attachKeyPress);
+    document.addEventListener("keypress", handleKeyPress);
     // attach handler for submitting your score button
     document.getElementById('submit_score').addEventListener('click', submitScore);
 
@@ -80,7 +80,7 @@ function LettersGame() {
             function frame() {
                 if (pos == 576) {
                     falling_letter.clearMove(falling_letter.interval);
-                    missedLetter();
+                    missedLetter(falling_letter);
                 } else {
                     pos++;
                     letter.style.top = pos + 'px';
@@ -88,48 +88,51 @@ function LettersGame() {
             }
         }
 
-        function missedLetter() {
-            if(!gameOn) {
-                return;
-            }
-            main.className = 'hit';
-            setTimeout(function() {
-                main.classList.remove('hit');
-            }, 1000);
+    }
 
-            misses--;
-            livesElement.innerText = misses;
+    function missedLetter(falling_letter) {
+        if(!gameOn) {
+            return;
+        }
+        main.className = 'hit';
+        setTimeout(function() {
+            main.classList.remove('hit');
+        }, 1000);
+
+        misses--;
+        livesElement.innerText = misses;
+        if(falling_letter) {
             main.removeChild(falling_letter);
-            if(misses == 0) {
-                gameOver();
-                // remove all other characters
-                main.querySelectorAll('.falling-letter').forEach(function(missed) {
-                    main.removeChild(missed);
-                });
-
-            }
+        }
+        if(misses == 0) {
+            gameOver();
+            // remove all other characters
+            main.querySelectorAll('.falling-letter').forEach(function(missed) {
+                main.removeChild(missed);
+            });
 
         }
+
     }
 
     //End game and show screen
     function gameOver() {
         gameOn = false;
         // Remove the event handler from the document
-        document.removeEventListener("keypress", attachKeyPress);
+        document.removeEventListener("keypress", handleKeyPress);
 
-        //Could use Web Animations API here, but showing how you can use a mix of Web Animations API and CSS transistions
+        //Could use Web Animations API here, but showing how you can use a mix of Web Animations API and CSS transitions
         document.getElementById('game-over').style.display = 'block';
     }
 
 
     /**
-     * attachKeyPress function,
+     * handleKeyPress function,
      * triggers the pressed key and checks if this letter is on
      * out letters array
      * @param evt
      */
-    function attachKeyPress(evt) {
+    function handleKeyPress(evt) {
             evt = evt || window.event;
             var charCode = evt.keyCode || evt.which;
             var charStr = String.fromCharCode(charCode);
@@ -140,6 +143,9 @@ function LettersGame() {
                 letters_array[charStr].clearMove();
                 main.removeChild(letters_array[charStr]);
                 delete letters_array[charStr];
+            }
+            else {
+                missedLetter();
             }
     }
 
@@ -152,7 +158,6 @@ function LettersGame() {
         }
     }
     setupNextLetter();
-
 
     function submitScore() {
         var player_data = {

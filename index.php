@@ -32,7 +32,9 @@
         <div id="highlights">
             <h2>High Score</h2>
             <ul id="scores"></ul>
+            <p>Press any click to restart</p>
         </div>
+        <!-- game status-->
         <div class="player-panel">
             <div id="game-score">Score: <span id="score">0</span> &nbsp● </div>
             <div id="game-lives">Lives: <span id="lives">3</span></div>
