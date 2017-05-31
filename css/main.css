@@ -64,11 +64,28 @@ body {
 #submit_score {
     margin-top: 20px;
 }
+#game-over {
+    top: 20%;
+}
 
 #game-over, #highlights {
     display: none;
     position: relative;
-    top: 20%;
+}
+#highlights {
+    top: 10%;
+}
+
+#highlights ul {
+    list-style-type: none;
+}
+#highlights h2 {
+    text-align: left;
+    padding-left:40px;
+}
+#highlights ul li {
+    text-align: left;
+    display: block;
 }
 
 .player-input {

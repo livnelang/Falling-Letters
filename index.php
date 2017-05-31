@@ -24,13 +24,14 @@
             <h2>Game Over</h2>
             <div class="player-input">
                 <label>Please enter your name</label>
-                <input type="text">
-                <button class="game_btn" id="submit_score">Start Game</button>
+                <input name="name" type="text">
+                <button class="game_btn" id="submit_score">Submit Score</button>
             </div>
         </div>
         <!--highlights-->
         <div id="highlights">
-
+            <h2>High Score</h2>
+            <ul id="scores"></ul>
         </div>
         <div class="player-panel">
             <div id="game-score">Score: <span id="score">0</span> &nbsp● </div>

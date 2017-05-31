@@ -3,6 +3,7 @@ window.onload = function() {
 };
 
 function loadGame() {
+    // attach handler for start game button
     document.getElementById('start_btn').addEventListener('click', function startIt(elm) {
         fadeOut(elm.currentTarget);
         fadeOut(document.getElementById('game-title'));
@@ -27,9 +28,10 @@ function LettersGame() {
     var score = "";
     var misses = livesElement.innerHTML;
     this.setCounterInterval = setCounterInterval;
-    this.attachKeyPress = attachKeyPress;
+    document.addEventListener("keypress", attachKeyPress);
+    // attach handler for submitting your score button
+    document.getElementById('submit_score').addEventListener('click', submitScore);
 
-    this.attachKeyPress();
     this.setCounterInterval();
 
     /**
@@ -56,7 +58,6 @@ function LettersGame() {
     function createLetter() {
         var idx = Math.floor(Math.random() * LETTERS.length);
         var x =  Math.floor(Math.random() * 350) + 10;
-        console.log(x);
         var falling_letter = document.createElement('div');
         falling_letter.className += "falling-letter";
         falling_letter.style.left = x + 'px';
@@ -114,6 +115,9 @@ function LettersGame() {
     //End game and show screen
     function gameOver() {
         gameOn = false;
+        // Remove the event handler from the document
+        document.removeEventListener("keypress", attachKeyPress);
+
         //Could use Web Animations API here, but showing how you can use a mix of Web Animations API and CSS transistions
         document.getElementById('game-over').style.display = 'block';
     }
@@ -125,8 +129,7 @@ function LettersGame() {
      * out letters array
      * @param evt
      */
-    function attachKeyPress() {
-        document.addEventListener("keypress", function (evt) {
+    function attachKeyPress(evt) {
             evt = evt || window.event;
             var charCode = evt.keyCode || evt.which;
             var charStr = String.fromCharCode(charCode);
@@ -138,7 +141,6 @@ function LettersGame() {
                 main.removeChild(letters_array[charStr]);
                 delete letters_array[charStr];
             }
-        });
     }
 
     function setupNextLetter() {
@@ -150,6 +152,26 @@ function LettersGame() {
         }
     }
     setupNextLetter();
+
+
+    function submitScore() {
+        var player_data = {
+            name: $("input[name=name]").val(),
+            result: score
+        };
+
+        $.post( "http://localhost:3000/insertRecord", player_data, function( data ) {
+            console.dir(data);
+            var items = [];
+            $.each( data, function( key, val ) {
+                items.push( "<li>"+ val.name + ' ' + val.result + "</li>");
+            });
+            $('#highlights ul').append(items);
+            $('#game-over').hide();
+            $('#highlights').show();
+        });
+
+    }
 }
 
 /**
@@ -167,3 +189,4 @@ function fadeOut(el){
         }
     })();
 }
+
