@@ -165,8 +165,11 @@ function LettersGame() {
             result: score
         };
 
-        $.post( "https://falling-letters-ws.herokuapp.com/insertRecord", player_data, function( data ) {
-            console.dir(data);
+        $('#game-over').html('');
+        document.getElementById('game-over').className = 'loader';
+
+        // https://falling-letters-ws.herokuapp.com/insertRecord
+        $.post( "http://localhost:3000/insertRecord", player_data, function( data ) {
             var items = [];
             $.each( data, function( key, val ) {
                 items.push( "<li>"+ val.name + ' ' + val.result + "</li>");
