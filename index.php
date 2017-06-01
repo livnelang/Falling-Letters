@@ -28,11 +28,13 @@
                 <button class="game_btn" id="submit_score">Submit Score</button>
             </div>
         </div>
+        <!-- loader-->
+        <div class="loader"></div>
         <!--highlights-->
         <div id="highlights">
             <h2>High Score</h2>
             <ul id="scores"></ul>
-            <p>Press any click to restart</p>
+            <p>Press any key to restart</p>
         </div>
         <!-- game status-->
         <div class="player-panel">
