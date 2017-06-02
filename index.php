@@ -11,7 +11,7 @@
     <script src="js/particle_explode.js"></script>
     <script src="js/game.js"></script>
 </head>
-
+    
 <body>
 <!-- wrapper  -->
 <div id="wrapper">
@@ -24,7 +24,7 @@
             <h2>Game Over</h2>
             <div class="player-input">
                 <label>Please enter your name</label>
-                <input name="name" type="text">
+                <input required name="name" type="text">
                 <button class="game_btn" id="submit_score">Submit Score</button>
             </div>
         </div>

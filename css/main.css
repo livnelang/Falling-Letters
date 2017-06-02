@@ -112,6 +112,7 @@ body {
     transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
     perspective: 1000px;
+    border: darkred 2px groove;
 }
 
 @keyframes shake {

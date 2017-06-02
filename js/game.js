@@ -197,26 +197,35 @@ function LettersGame(start) {
      * send player data, and fetch highlights table
      */
     function submitScore() {
+        var items = [];
         var player_data = {
             name: $("input[name=name]").val(),
             result: score
         };
-
+        // remove game-over, show spinner
         $('#game-over').hide();
         $('.loader').show();
 
-        $.post( "https://falling-letters-ws.herokuapp.com/insertRecord", player_data, function( data ) {
-            var items = [];
-            $.each( data, function( key, val ) {
-                items.push( "<li>"+ val.name + ' ' + val.result + "</li>");
-            });
-            $('#highlights ul').append(items);
-            $('.loader').hide();
-            $('#highlights').show();
-            // register a new click for a restart
-            document.addEventListener("keypress", anyKeyRestart);
-        });
-
+        // http://localhost:3000/insertRecord   https://falling-letters-ws.herokuapp.com/insertRecord
+        // ajax call
+        $.post( "http://localhost:3000/insertRecord", player_data)
+            .done(function( data ) {
+                $.each( data, function( key, val ) {
+                    items.push( "<li>"+ val.name + ' ' + val.result + "</li>");
+                });
+            })
+            .fail(function(error_data) {
+                $.each( error_data.responseJSON, function( key, val ) {
+                    items.push( "<li>"+ val + "</li>");
+                });
+            })
+            .always(function() {
+                // register a new click for a restart
+                $('#highlights ul').append(items);
+                $('.loader').hide();
+                $('#highlights').show();
+                document.addEventListener("keypress", anyKeyRestart);
+            })
     }
 }
 
