@@ -206,9 +206,8 @@ function LettersGame(start) {
         $('#game-over').hide();
         $('.loader').show();
 
-        // http://localhost:3000/insertRecord   https://falling-letters-ws.herokuapp.com/insertRecord
         // ajax call
-        $.post( "http://localhost:3000/insertRecord", player_data)
+        $.post( "https://falling-letters-ws.herokuapp.com/insertRecord", player_data)
             .done(function( data ) {
                 $.each( data, function( key, val ) {
                     items.push( "<li>"+ val.name + ' ' + val.result + "</li>");
