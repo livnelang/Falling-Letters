@@ -5,11 +5,16 @@ window.onload = function() {
  * initializes the game for the first time
  */
 function loadGame() {
+    game_lang = "eng";
+    //attach events for langs options
+    $('button[lang]').click(handleLangs);
+    
     // attach handler for start game button
     document.getElementById('start_btn').addEventListener('click', function startIt(elm) {
         fadeOut(elm.currentTarget);
         fadeOut(document.getElementById('game-title'));
-        var letters_game = new LettersGame(true);
+        fadeOut(document.getElementById('langs'));
+        var letters_game = new LettersGame(true, game_lang);
     });
 }
 
@@ -19,9 +24,13 @@ function loadGame() {
  * @constructor
  * @param start- true/false/null
  */
-function LettersGame(start) {
-    // var LETTERS = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-    var LETTERS = ['א','ב','ג','ד','ה','ו','ז','ח','ט','י','כ','ל','מ','נ','ס','ע','פ','צ','ק','ר','ש','ת'];
+function LettersGame(start, game_lang) {
+    var LETTERS;
+    var letters = {
+        eng: ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'],
+        heb: ['א','ב','ג','ד','ה','ו','ז','ח','ט','י','כ','ל','מ','נ','ס','ע','פ','צ','ק','ר','ש','ת']
+    };
+    var LETTERS = letters[game_lang];
     var letters_array = {};
     var gameOn = true;
     var timeOffset = 2000; //interval between letters starting, will be faster over time
@@ -227,6 +236,23 @@ function LettersGame(start) {
                 document.addEventListener("keypress", anyKeyRestart);
             })
     }
+}
+
+/**
+ * handleLangs function,
+ * used to decide which lang is going to be played
+ * @param evt
+ */
+function handleLangs(evt) {
+    var elem = evt.currentTarget;
+    game_lang = elem.lang;
+    // is selected lang already or not
+    if ($(evt.target).hasClass('selected_lang')) {
+        return;
+    }
+        // remove last one, assign new
+    $('.selected_lang').removeClass('selected_lang');
+    $(elem).addClass('selected_lang');
 }
 
 /**

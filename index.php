@@ -19,6 +19,11 @@
     <main id="main">
         <h2 id="game-title">Falling Letters</h2>
         <button class="game_btn" id="start_btn">Start Game</button>
+        <!-- langs panel-->
+        <div id="langs">
+            <button lang="eng" type="button" class="btn btn-default selected_lang">English</button>
+            <button lang="heb" type="button" class="btn btn-default">Hebrew</button>
+        </div>
         <!--game-over-->
         <div id="game-over">
             <h2>Game Over</h2>
