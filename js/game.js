@@ -180,7 +180,7 @@ function LettersGame(start, game_lang) {
         $('#scores').html('');
         $('#highlights').hide();
         livesElement.innerHTML = 3;
-        new LettersGame();
+        new LettersGame(false, game_lang);
     }
 
     /**
